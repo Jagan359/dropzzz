@@ -1,0 +1,76 @@
+
+
+<h1>Home#index</h1>
+<p>Find me in app/views/home/index.html.erb</p>
+  
+<% if user_signed_in? %>
+            <li> You are logged in as <%= current_user.email  %></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path , method: :delete %></li>
+   
+  <div id="dropzone">
+	<form action="home/upload" class="dropzone" >
+
+		<div class="dz-message">
+			Drop files here or click to upload.<br />
+		</div>
+
+	</form>
+
+	</div>
+	<div>
+	</div>
+
+	         	
+<% else %>
+
+<!-- <li><%= link_to "Log In", new_user_session_path , method: :get %></li>
+<li><%= link_to "Log In AJAX", new_user_session_path , remote: true %></li> -->
+ <li><%= link_to "Sign Up", new_user_registration_path , method: :get %></li>
+
+
+
+<!-- Button for Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Login</button>
+<!-- Trial Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Login</h4>
+      </div>
+      <div class="modal-body">
+        
+        		<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { id: "ajax_contact" } ) do |f| %>
+			
+          <div class="form-group">
+            
+					    <%= f.label :email %><br />
+					    <%= f.email_field :email, autofocus: true %>
+			</div>
+          <div class="form-group">
+					    <%= f.label :password %><br />
+					    <%= f.password_field :password, autocomplete: "off" %>
+          </div>
+          <div class="form-group">
+					      <%= f.check_box :remember_me %>
+					      <%= f.label :remember_me %>
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			    <%= f.submit 'Login', :class => 'btn btn-primary' %>
+					  
+		
+        
+      			<% end %>
+		  
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+<script src="app.js"></script>
